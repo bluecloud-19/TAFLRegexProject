@@ -1,9 +1,13 @@
 # AutoCurate: Regular Expression to Finite Automata Visualizer
 
 Name: ABHISHEK GANDHI
+
 Roll No: 2024UCA1940
+
 Class: CSAI 2
+
 Project Number: 4
+
 Project Title: Regular Expression to Automata Converter
 
 ## About the Project
