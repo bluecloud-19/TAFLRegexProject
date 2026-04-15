@@ -1,0 +1,244 @@
+/* ── Presentation Mode ── */
+    #pres-mode {
+      position: fixed;
+      inset: 0;
+      background: var(--surface-lowest);
+      z-index: 2000;
+      display: none;
+      flex-direction: column;
+    }
+
+    #pres-mode.open {
+      display: flex;
+    }
+
+    .pres-top {
+      height: 56px;
+      background: var(--surface-low);
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .pres-brand {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--primary);
+    }
+
+    .pres-slide-info {
+      font-size: 0.75rem;
+      color: var(--outline);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .pres-exit {
+      padding: 0.35rem 0.8rem;
+      background: rgba(187, 22, 19, 0.08);
+      border: none;
+      border-radius: var(--radius-full);
+      color: var(--tertiary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--dur-fast);
+    }
+
+    .pres-exit:hover {
+      background: rgba(187, 22, 19, 0.15);
+    }
+
+    .pres-body {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .pres-canvas {
+      flex: 1;
+      position: relative;
+      background: var(--surface);
+    }
+
+    .pres-canvas::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, var(--outline-variant) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.3;
+    }
+
+    #pres-cy {
+      width: 100%;
+      height: 100%;
+    }
+
+    .pres-info {
+      width: 380px;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      overflow-y: auto;
+      background: var(--surface-lowest);
+    }
+
+    .pres-eyebrow {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    .pres-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--on-surface);
+      line-height: 1.15;
+    }
+
+    .pres-desc {
+      font-size: 0.86rem;
+      color: var(--on-surface-variant);
+      line-height: 1.65;
+    }
+
+    .pres-diagram-block {
+      padding: 0.6rem 0.8rem;
+      background: var(--surface-highest);
+      border-radius: var(--radius-md);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--primary);
+    }
+
+    .pres-footer {
+      height: 68px;
+      background: var(--surface-highest);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .pres-nav-btn {
+      padding: 0.6rem 1.5rem;
+      background: var(--surface-lowest);
+      border: none;
+      border-radius: var(--radius-full);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: all var(--dur-normal) var(--ease-socialite);
+      box-shadow: var(--lift-shadow);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .pres-nav-btn:hover {
+      background: var(--surface-high);
+      color: var(--on-surface);
+    }
+
+    .pres-nav-btn.primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-container));
+      color: var(--on-primary);
+    }
+
+    .pres-nav-btn.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--ambient-shadow);
+    }
+
+    .pres-dots {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .pres-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background: var(--outline-variant);
+      transition: all var(--dur-normal) var(--ease-socialite);
+      cursor: pointer;
+    }
+
+    .pres-dot.done {
+      background: var(--secondary);
+    }
+
+    .pres-dot.active {
+      background: var(--primary);
+      width: 22px;
+    }
+
+    /* Toast */
+    #toast-wrap {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3000;
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 0.4rem;
+      pointer-events: none;
+    }
+
+    .toast {
+      padding: 0.55rem 1rem;
+      background: var(--on-surface);
+      color: var(--surface);
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 500;
+      box-shadow: var(--float-shadow);
+      animation: toastIn 0.3s var(--ease-socialite), toastOut 0.3s var(--ease-socialite) 2.5s forwards;
+      pointer-events: all;
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes toastOut {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .not-ready {
+      font-size: 0.75rem;
+      color: var(--outline);
+      padding: 0.8rem 0;
+      font-style: italic;
+    }

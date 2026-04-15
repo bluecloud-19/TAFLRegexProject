@@ -1,0 +1,184 @@
+/* ── Top Bar ── */
+    #topbar {
+      height: var(--topbar-height);
+      background: var(--surface-low);
+      display: flex;
+      align-items: center;
+      padding: 0 1.5rem;
+      gap: 1.5rem;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      min-width: 280px;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-container));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      box-shadow: var(--lift-shadow);
+    }
+
+    .brand-name {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.01em;
+    }
+
+    .low-sym {
+      text-transform: none !important;
+      display: inline-block;
+    }
+
+    .pipeline-breadcrumb {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+    }
+
+    .pipeline-crumb {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .crumb-btn {
+      background: none;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--outline);
+      padding: 0.3rem 0.7rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease-socialite);
+    }
+
+    .crumb-btn:hover {
+      color: var(--primary);
+      background: var(--surface-highest);
+    }
+
+    .crumb-btn.active {
+      color: var(--primary);
+      background: rgba(0, 91, 191, 0.1);
+      font-weight: 700;
+    }
+
+    .crumb-btn.done {
+      color: var(--secondary);
+    }
+
+    .crumb-arrow {
+      color: var(--outline-variant);
+      font-size: 0.8rem;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      min-width: 280px;
+      justify-content: flex-end;
+    }
+
+    .btn-present {
+      background: linear-gradient(135deg, var(--primary), var(--primary-container));
+      border: none;
+      color: var(--on-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.45rem 1.2rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--dur-normal) var(--ease-socialite);
+      box-shadow: var(--lift-shadow);
+      letter-spacing: 0.02em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-present:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--ambient-shadow);
+    }
+
+    .btn-present svg {
+      vertical-align: middle;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      color: var(--outline);
+      font-size: 1.2rem;
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--dur-fast);
+    }
+
+    .icon-btn:hover {
+      background: var(--surface-high);
+      color: var(--primary);
+    }
+
+    /* ── Layout ── */
+    #app-body {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* ── Left Sidebar ── */
+    #sidebar {
+      width: var(--sidebar-width);
+      background: var(--surface-low);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    .sidebar-section {
+      padding: 1rem;
+    }
+
+    .sidebar-section+.sidebar-section {
+      padding-top: 0;
+    }
+
+    .section-eyebrow {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--outline);
+      margin-bottom: 0.5rem;
+    }

@@ -1,0 +1,75 @@
+# Operating System Files
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# Editor and IDE Files
+# VS Code
+.vscode/
+*.code-workspace
+
+# JetBrains IDEs (WebStorm, IntelliJ, etc.)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# Logs and Temporary Files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Backup Files
+*.bak
+*.backup
+*~
+
+# Node.js (if you add npm packages in future)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build outputs (if you add build tools in future)
+dist/
+build/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+

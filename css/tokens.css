@@ -1,0 +1,40 @@
+/* ── Design Tokens ── */
+:root {
+  --surface-dim: #c7dde9;
+  --surface: #f3faff;
+  --surface-low: #e6f6ff;
+  --surface-high: #d5ecf8;
+  --surface-highest: #cfe6f2;
+  --surface-lowest: #ffffff;
+  --primary: #005bbf;
+  --primary-container: #1a73e8;
+  --on-primary: #ffffff;
+  --secondary: #006e1c;
+  --on-secondary: #ffffff;
+  --tertiary: #bb1613;
+  --on-tertiary: #ffffff;
+  --on-surface: #071e27;
+  --on-surface-variant: #414754;
+  --outline: #727785;
+  --outline-variant: #c1c6d6;
+  --accepted-bg: #91f78e;
+  --accepted-text: #002204;
+  --rejected-bg: #ffdad6;
+  --rejected-text: #410001;
+  --ambient-shadow: 0px 20px 40px rgba(7, 30, 39, 0.06);
+  --lift-shadow: 0px 4px 12px rgba(7, 30, 39, 0.08);
+  --float-shadow: 0px 32px 64px rgba(7, 30, 39, 0.12);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+  --ease-socialite: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-normal: 280ms;
+  --dur-slow: 480ms;
+  --sidebar-width: 260px;
+  --right-width: 310px;
+  --topbar-height: 72px;
+}

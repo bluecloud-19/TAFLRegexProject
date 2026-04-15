@@ -1,0 +1,449 @@
+/* ── Center Canvas ── */
+    #center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    #canvas-wrap {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    #canvas-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, var(--outline-variant) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #cy {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: transparent;
+    }
+
+    /* Empty state */
+    #empty-state {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .es-icon {
+      width: 72px;
+      height: 72px;
+      background: var(--surface-low);
+      border-radius: var(--radius-2xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: var(--ambient-shadow);
+    }
+
+    .es-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--on-surface);
+    }
+
+    .es-desc {
+      font-size: 0.8rem;
+      color: var(--outline);
+      max-width: 220px;
+      line-height: 1.5;
+    }
+
+    /* Canvas floating controls */
+    .canvas-float {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: none;
+    }
+
+    .canvas-float.visible {
+      display: block;
+    }
+
+    /* Ensure float-pill is visible in fullscreen */
+    #canvas-wrap:fullscreen .canvas-float.visible,
+    #canvas-wrap:-webkit-full-screen .canvas-float.visible {
+      display: block;
+      z-index: 9999;
+    }
+
+    .float-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      background: var(--surface-lowest);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius-full);
+      padding: 0.35rem 0.7rem;
+      box-shadow: var(--float-shadow);
+      border: 1px solid var(--outline-variant);
+    }
+
+    .float-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      background: none;
+      color: var(--on-surface-variant);
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--dur-fast);
+    }
+
+    .float-btn:hover {
+      background: var(--surface-highest);
+      color: var(--primary);
+    }
+
+    .float-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .float-sep {
+      width: 1px;
+      height: 16px;
+      background: var(--outline-variant);
+      margin: 0 0.2rem;
+      opacity: 0.5;
+    }
+
+    /* Zoom controls */
+    .zoom-ctrl {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .zoom-btn {
+      width: 32px;
+      height: 32px;
+      background: var(--surface-lowest);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius-md);
+      color: var(--on-surface-variant);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--dur-fast);
+      box-shadow: var(--lift-shadow);
+    }
+
+    .zoom-btn:hover {
+      background: var(--surface-high);
+      color: var(--primary);
+    }
+
+    /* Canvas badge */
+    .canvas-badge {
+      position: absolute;
+      top: 32px;
+      right: 120px;
+      z-index: 10;
+      background: rgba(0, 91, 191, 0.1);
+      color: var(--primary);
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.7rem;
+      border-radius: var(--radius-full);
+      display: none;
+    }
+
+    .canvas-badge.visible {
+      display: block;
+    }
+
+    /* ε-closure popup */
+    .closure-popup {
+      position: absolute;
+      background: var(--surface-lowest);
+      border-radius: var(--radius-lg);
+      padding: 0.8rem 1rem;
+      box-shadow: var(--float-shadow);
+      z-index: 20;
+      display: none;
+      min-width: 180px;
+    }
+
+    .closure-popup.visible {
+      display: block;
+      animation: fadeScaleIn var(--dur-fast) var(--ease-socialite);
+    }
+
+    .closure-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--on-surface);
+      margin-bottom: 0.3rem;
+    }
+
+    .closure-states {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* ── Floating Canvas Legend ── */
+    .canvas-legend {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      padding: 0.65rem 0.8rem;
+      background: var(--surface);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--float-shadow);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      opacity: 0.95;
+      animation: slideInRight 0.4s var(--ease-socialite);
+    }
+
+    .cl-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      letter-spacing: 0.02em;
+    }
+
+    .canvas-reset-wrap {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      z-index: 100;
+    }
+
+    .btn-canvas-reset {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      background: var(--surface);
+      color: var(--tertiary);
+      border: 1.5px solid var(--outline-variant);
+      border-radius: var(--radius-full);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--float-shadow);
+      transition: all 0.2s var(--ease-socialite);
+    }
+
+    .btn-canvas-reset:hover {
+      background: var(--surface-high);
+      border-color: var(--tertiary);
+      transform: translateY(-1px);
+    }
+
+    .cl-symbol {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: white;
+      border: 1px solid var(--outline);
+    }
+
+    .cl-symbol.start {
+      border: 2.5px solid #4caf50;
+      outline: 1px solid var(--outline);
+      outline-offset: -2.5px;
+    }
+
+    .cl-symbol.final {
+      border: 2.5px solid #f44336;
+      outline: 1px solid var(--outline);
+      outline-offset: -2.5px;
+    }
+
+    .cl-symbol.dead {
+      border-style: dashed;
+      opacity: 0.6;
+    }
+
+    .cl-divider {
+      height: 1px;
+      background: var(--outline-variant);
+      margin: 0.1rem 0;
+    }
+
+    .cl-line {
+      width: 18px;
+      height: 2px;
+      background: var(--outline);
+    }
+
+    .cl-line.dashed {
+      background: none;
+      border-top: 2px dashed var(--primary-container);
+    }
+
+    @keyframes fadeScaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* Regex canvas display (shown on regex stage, post-generate) */
+    #regex-canvas-display {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      z-index: 2;
+      padding: 2rem;
+    }
+
+    .rcd-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      background: rgba(0, 91, 191, 0.08);
+      padding: 0.3rem 0.9rem;
+      border-radius: var(--radius-full);
+    }
+
+    .rcd-regex-wrap {
+      background: var(--surface-lowest);
+      border-radius: var(--radius-2xl);
+      padding: 2rem 3rem;
+      box-shadow: var(--float-shadow);
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .rcd-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--outline);
+      margin-bottom: 0.7rem;
+    }
+
+    .rcd-regex-str {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.08em;
+      word-break: break-all;
+      line-height: 1.2;
+    }
+
+    .rcd-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 1.2rem;
+    }
+
+    .rcd-pill {
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .rcd-pill.syms {
+      background: rgba(0, 91, 191, 0.1);
+      color: var(--primary);
+    }
+
+    .rcd-pill.ops {
+      background: rgba(124, 58, 237, 0.1);
+      color: #7c3aed;
+    }
+
+    .rcd-pill.postfix {
+      background: rgba(0, 110, 28, 0.1);
+      color: var(--secondary);
+    }
+
+    .rcd-desc {
+      font-size: 0.82rem;
+      color: var(--on-surface-variant);
+      line-height: 1.6;
+      font-style: italic;
+      max-width: 480px;
+      text-align: center;
+    }
+
+    .rcd-arrow-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--outline);
+    }
+
+    .rcd-step {
+      background: var(--surface-lowest);
+      border-radius: var(--radius-xl);
+      padding: 0.55rem 1.1rem;
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--on-surface);
+      box-shadow: var(--lift-shadow);
+    }
