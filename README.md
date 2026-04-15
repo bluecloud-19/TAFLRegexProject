@@ -1,5 +1,11 @@
 # AutoCurate: Regular Expression to Finite Automata Visualizer
 
+Name: ABHISHEK GANDHI
+Roll No: 2024UCA1940
+Class: CSAI 2
+Project Number: 4
+Project Title: Regular Expression to Automata Converter
+
 ## About the Project
 
 AutoCurate is an interactive web-based educational platform designed to visualize the complete conversion pipeline from regular expressions to various forms of finite automata. This project was developed as part of a Theory of Computation course to provide students and educators with a comprehensive tool for understanding the theoretical foundations and practical implementations of automata theory.
