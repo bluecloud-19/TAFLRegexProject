@@ -195,3 +195,46 @@ const CY_STYLE = [
     function fitGraph() { if (cy) smartFit(cy, 50); }
     function zoomIn() { if (cy) cy.zoom({ level: cy.zoom() * 1.3, renderedPosition: { x: cy.width() / 2, y: cy.height() / 2 } }); }
     function zoomOut() { if (cy) cy.zoom({ level: cy.zoom() * 0.77, renderedPosition: { x: cy.width() / 2, y: cy.height() / 2 } }); }
+
+    function toggleFullscreen() {
+      const canvasWrap = $('canvas-wrap');
+      if (!canvasWrap) return;
+      
+      if (!document.fullscreenElement) {
+        // Enter fullscreen
+        if (canvasWrap.requestFullscreen) {
+          canvasWrap.requestFullscreen();
+        } else if (canvasWrap.webkitRequestFullscreen) {
+          canvasWrap.webkitRequestFullscreen();
+        } else if (canvasWrap.msRequestFullscreen) {
+          canvasWrap.msRequestFullscreen();
+        }
+      } else {
+        // Exit fullscreen
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+      }
+    }
+
+    // Listen for fullscreen changes to resize the graph
+    document.addEventListener('fullscreenchange', () => {
+      setTimeout(() => {
+        if (cy) {
+          cy.resize();
+          smartFit(cy, 50);
+        }
+      }, 100);
+    });
+    document.addEventListener('webkitfullscreenchange', () => {
+      setTimeout(() => {
+        if (cy) {
+          cy.resize();
+          smartFit(cy, 50);
+        }
+      }, 100);
+    });
